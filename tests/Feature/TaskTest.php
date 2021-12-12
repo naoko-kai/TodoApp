@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\Task; // Taskモデルを使う
 
+
 class TaskTest extends TestCase
 {
     use RefreshDatabase; //テスト実行時にDBがリセット
@@ -42,6 +43,45 @@ class TaskTest extends TestCase
             ->assertJsonFragment($data); // 登録情報が正しいか確認
     }
 
+    /**
+     * @test
+     */
+    // public function タイトルが空の場合は登録できない()
+    // {
+
+    //     $data = [
+    //         'title' => ''
+    //     ];
+
+    //     $response = $this->postJson('api/tasks', $data); //post で受け取るので書き方注意。$dataを第二引数に入れる
+
+    //     $response
+    //         ->assertStatus(302) 
+    //         ->assertJsonValidationErrors(
+    //             ['title' => 'titleは、必ず指定してください。']
+    //         ); // バリデーションエラーを確認
+    // }
+
+    /**
+     * @test
+     */
+    // public function タイトルが255文字より多い場合は登録できない()
+    // {
+
+    //     $data = [
+    //         'title' => str_repeat('あ', 256)
+    //     ];
+
+    //     $response = $this->postJson('api/tasks', $data); //post で受け取るので書き方注意。$dataを第二引数に入れる
+    //     // dd($response);
+
+    //     $response
+    //         // ->assertStatus(302) 
+    //         ->assertJsonValidationErrors(
+    //             ['title' => 'titleは、255文字以下にしてください。']
+    //         ); // バリデーションエラーを確認
+    // }
+    
     /**
      * @test
      */

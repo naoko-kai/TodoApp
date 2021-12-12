@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
-use App\Http\Requests\StoreTaskRequest;
-use App\Http\Requests\UpdateTaskRequest;
+// use App\Http\Requests\StoreTaskRequest;
+// use App\Http\Requests\UpdateTaskRequest;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -26,6 +27,16 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'title'  => 'required|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+            ->withInput()
+            ->withErrors($validator);
+        }
+
         $task = Task::create($request->all());
 
         return $task

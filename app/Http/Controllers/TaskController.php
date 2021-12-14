@@ -83,4 +83,20 @@ class TaskController extends Controller
             ? response()->json($task) // デフォルトが200
             : response()->json([],500);
     }
+
+    /**
+     * チェックリストの is_done アップデート
+     * 
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Models\Task  $task
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateDone(Request $request, Task $task)
+    {
+        $task->is_done = $request->is_done;
+
+        return $task->update()
+            ? response()->json($task)
+            : response()->json([], 500);
+    }
 }

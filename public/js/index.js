@@ -2074,7 +2074,8 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "getTasks": () => (/* binding */ getTasks)
+/* harmony export */   "getTasks": () => (/* binding */ getTasks),
+/* harmony export */   "updateDoneTask": () => (/* binding */ updateDoneTask)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
@@ -2138,6 +2139,36 @@ var getTasks = function getTasks() {
         }
       }
     }, _callee);
+  }));
+};
+
+var updateDoneTask = function updateDoneTask(_ref) {
+  var id = _ref.id,
+      is_done = _ref.is_done;
+  return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+    var _yield$axios$patch, data;
+
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.next = 2;
+            return axios__WEBPACK_IMPORTED_MODULE_1___default().patch("/api/tasks/update-done/".concat(id), {
+              is_done: !is_done
+            } // 送信する値 is_doneが切り替わる
+            );
+
+          case 2:
+            _yield$axios$patch = _context2.sent;
+            data = _yield$axios$patch.data;
+            return _context2.abrupt("return", data);
+
+          case 5:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
   }));
 };
 
@@ -2313,17 +2344,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _queries_TaskQuery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../queries/TaskQuery */ "./resources/ts/queries/TaskQuery.ts");
+
 
 
 var TaskItem = function TaskItem(_ref) {
   var task = _ref.task;
+  var updateDoneTask = (0,_queries_TaskQuery__WEBPACK_IMPORTED_MODULE_1__.useUpdateDoneTask)();
   return react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-    key: task.id
+    className: task.is_done ? 'done' : ''
   }, react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
     className: "checkbox-label"
   }, react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
     type: "checkbox",
-    className: "checkbox-input"
+    className: "checkbox-input",
+    onClick: function onClick() {
+      return updateDoneTask.mutate(task);
+    }
   })), react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, task.title)), react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     className: "btn is-delete"
   }, "\u524A\u9664"));
@@ -2421,7 +2458,8 @@ var TaskPage = function TaskPage() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "useTasks": () => (/* binding */ useTasks)
+/* harmony export */   "useTasks": () => (/* binding */ useTasks),
+/* harmony export */   "useUpdateDoneTask": () => (/* binding */ useUpdateDoneTask)
 /* harmony export */ });
 /* harmony import */ var _api_TaskAPI__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/TaskAPI */ "./resources/ts/api/TaskAPI.ts");
 /* harmony import */ var react_query__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-query */ "./node_modules/react-query/es/index.js");
@@ -2431,6 +2469,19 @@ __webpack_require__.r(__webpack_exports__);
 var useTasks = function useTasks() {
   return (0,react_query__WEBPACK_IMPORTED_MODULE_1__.useQuery)('tasks', function () {
     return _api_TaskAPI__WEBPACK_IMPORTED_MODULE_0__.getTasks();
+  });
+};
+
+var useUpdateDoneTask = function useUpdateDoneTask() {
+  var queryClient = (0,react_query__WEBPACK_IMPORTED_MODULE_1__.useQueryClient)();
+  return (0,react_query__WEBPACK_IMPORTED_MODULE_1__.useMutation)(_api_TaskAPI__WEBPACK_IMPORTED_MODULE_0__.updateDoneTask, {
+    onSuccess: function onSuccess() {
+      // コンポーネントの再描画
+      queryClient.invalidateQueries('tasks'); // useQueryで設定した'tasks'を入れる
+    },
+    onError: function onError() {
+      console.log('再描画に失敗');
+    }
   });
 };
 

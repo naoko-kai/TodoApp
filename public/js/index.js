@@ -2065,6 +2065,86 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./resources/ts/api/TaskAPI.ts":
+/*!*************************************!*\
+  !*** ./resources/ts/api/TaskAPI.ts ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getTasks": () => (/* binding */ getTasks)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+
+
+var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function (resolve) {
+      resolve(value);
+    });
+  }
+
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+
+
+
+var getTasks = function getTasks() {
+  return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+    var _yield$axios$get, data;
+
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return axios__WEBPACK_IMPORTED_MODULE_1___default().get('api/tasks');
+
+          case 2:
+            _yield$axios$get = _context.sent;
+            data = _yield$axios$get.data;
+            return _context.abrupt("return", data);
+
+          case 5:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+};
+
+
+
+/***/ }),
+
 /***/ "./resources/ts/app.tsx":
 /*!******************************!*\
   !*** ./resources/ts/app.tsx ***!
@@ -2188,6 +2268,124 @@ var LoginPage = function LoginPage() {
 
 /***/ }),
 
+/***/ "./resources/ts/pages/tasks/components/TaskInput.tsx":
+/*!***********************************************************!*\
+  !*** ./resources/ts/pages/tasks/components/TaskInput.tsx ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+var TaskInput = function TaskInput() {
+  return react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+    className: "input-form"
+  }, react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "inner"
+  }, react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+    type: "text",
+    className: "input",
+    placeholder: "TODO\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002",
+    defaultValue: ""
+  }), react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    className: "btn is-primary"
+  }, "\u8FFD\u52A0")));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TaskInput);
+
+/***/ }),
+
+/***/ "./resources/ts/pages/tasks/components/TaskItem.tsx":
+/*!**********************************************************!*\
+  !*** ./resources/ts/pages/tasks/components/TaskItem.tsx ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+var TaskItem = function TaskItem(_ref) {
+  var task = _ref.task;
+  return react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+    key: task.id
+  }, react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+    className: "checkbox-label"
+  }, react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+    type: "checkbox",
+    className: "checkbox-input"
+  })), react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, task.title)), react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    className: "btn is-delete"
+  }, "\u524A\u9664"));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TaskItem);
+
+/***/ }),
+
+/***/ "./resources/ts/pages/tasks/components/TaskList.tsx":
+/*!**********************************************************!*\
+  !*** ./resources/ts/pages/tasks/components/TaskList.tsx ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _queries_TaskQuery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../queries/TaskQuery */ "./resources/ts/queries/TaskQuery.ts");
+/* harmony import */ var _TaskItem__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TaskItem */ "./resources/ts/pages/tasks/components/TaskItem.tsx");
+
+
+
+
+var TaskList = function TaskList() {
+  var _useTasks = (0,_queries_TaskQuery__WEBPACK_IMPORTED_MODULE_1__.useTasks)(),
+      tasks = _useTasks.data,
+      status = _useTasks.status;
+
+  if (status === 'loading') {
+    return react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: 'loader'
+    });
+  } else if (status === 'error') {
+    return react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: 'align-center'
+    }, "\u30C7\u30FC\u30BF\u306E\u8AAD\u307F\u8FBC\u307F\u306B\u5931\u6557\u3057\u307E\u3057\u305F\u3002");
+  } else if (!tasks || tasks.length <= 0) {
+    return react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: 'align-center'
+    }, "\u767B\u9332\u3055\u308C\u305FTODO\u306F\u3042\u308A\u307E\u305B\u3093\u3002");
+  }
+
+  return react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "inner"
+  }, react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+    className: "task-list"
+  }, tasks.map(function (task) {
+    return react__WEBPACK_IMPORTED_MODULE_0__.createElement(_TaskItem__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      key: task.id,
+      task: task
+    });
+  })));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TaskList);
+
+/***/ }),
+
 /***/ "./resources/ts/pages/tasks/index.tsx":
 /*!********************************************!*\
   !*** ./resources/ts/pages/tasks/index.tsx ***!
@@ -2199,122 +2397,44 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_query__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-query */ "./node_modules/react-query/es/index.js");
-
-
-var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
-  function adopt(value) {
-    return value instanceof P ? value : new P(function (resolve) {
-      resolve(value);
-    });
-  }
-
-  return new (P || (P = Promise))(function (resolve, reject) {
-    function fulfilled(value) {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-
-    function rejected(value) {
-      try {
-        step(generator["throw"](value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-
-    function step(result) {
-      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-    }
-
-    step((generator = generator.apply(thisArg, _arguments || [])).next());
-  });
-};
-
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _components_TaskInput__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/TaskInput */ "./resources/ts/pages/tasks/components/TaskInput.tsx");
+/* harmony import */ var _components_TaskList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/TaskList */ "./resources/ts/pages/tasks/components/TaskList.tsx");
 
 
 
 
 var TaskPage = function TaskPage() {
-  var _useQuery = (0,react_query__WEBPACK_IMPORTED_MODULE_3__.useQuery)('tasks', function () {
-    return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      var _yield$axios$get, data;
-
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_2___default().get('api/tasks');
-
-            case 2:
-              _yield$axios$get = _context.sent;
-              data = _yield$axios$get.data;
-              return _context.abrupt("return", data);
-
-            case 5:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
-  }),
-      tasks = _useQuery.data,
-      status = _useQuery.status;
-
-  if (status === 'loading') {
-    return react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
-      className: 'loader'
-    });
-  } else if (status === 'error') {
-    return react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
-      className: 'align-center'
-    }, "\u30C7\u30FC\u30BF\u306E\u8AAD\u307F\u8FBC\u307F\u306B\u5931\u6557\u3057\u307E\u3057\u305F\u3002");
-  } else if (!tasks || tasks.length <= 0) {
-    return react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
-      className: 'align-center'
-    }, "\u767B\u9332\u3055\u308C\u305FTODO\u306F\u3042\u308A\u307E\u305B\u3093\u3002");
-  }
-
-  return react__WEBPACK_IMPORTED_MODULE_1__.createElement(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1__.createElement("form", {
-    className: "input-form"
-  }, react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
-    className: "inner"
-  }, react__WEBPACK_IMPORTED_MODULE_1__.createElement("input", {
-    type: "text",
-    className: "input",
-    placeholder: "TODO\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002",
-    defaultValue: ""
-  }), react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", {
-    className: "btn is-primary"
-  }, "\u8FFD\u52A0"))), react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
-    className: "inner"
-  }, react__WEBPACK_IMPORTED_MODULE_1__.createElement("ul", {
-    className: "task-list"
-  }, tasks.map(function (task) {
-    return react__WEBPACK_IMPORTED_MODULE_1__.createElement("li", {
-      key: task.id
-    }, react__WEBPACK_IMPORTED_MODULE_1__.createElement("label", {
-      className: "checkbox-label"
-    }, react__WEBPACK_IMPORTED_MODULE_1__.createElement("input", {
-      type: "checkbox",
-      className: "checkbox-input"
-    })), react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1__.createElement("span", null, task.title)), react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", {
-      className: "btn is-delete"
-    }, "\u524A\u9664"));
-  }))));
+  return react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_TaskInput__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_TaskList__WEBPACK_IMPORTED_MODULE_2__["default"], null));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TaskPage);
+
+/***/ }),
+
+/***/ "./resources/ts/queries/TaskQuery.ts":
+/*!*******************************************!*\
+  !*** ./resources/ts/queries/TaskQuery.ts ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "useTasks": () => (/* binding */ useTasks)
+/* harmony export */ });
+/* harmony import */ var _api_TaskAPI__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/TaskAPI */ "./resources/ts/api/TaskAPI.ts");
+/* harmony import */ var react_query__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-query */ "./node_modules/react-query/es/index.js");
+
+
+
+var useTasks = function useTasks() {
+  return (0,react_query__WEBPACK_IMPORTED_MODULE_1__.useQuery)('tasks', function () {
+    return _api_TaskAPI__WEBPACK_IMPORTED_MODULE_0__.getTasks();
+  });
+};
+
+
 
 /***/ }),
 

@@ -2076,7 +2076,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "getTasks": () => (/* binding */ getTasks),
 /* harmony export */   "updateDoneTask": () => (/* binding */ updateDoneTask),
-/* harmony export */   "createTask": () => (/* binding */ createTask)
+/* harmony export */   "createTask": () => (/* binding */ createTask),
+/* harmony export */   "updateTask": () => (/* binding */ updateTask),
+/* harmony export */   "deleteTask": () => (/* binding */ deleteTask)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
@@ -2173,22 +2175,23 @@ var updateDoneTask = function updateDoneTask(_ref) {
   }));
 };
 
-var createTask = function createTask(title) {
+var updateTask = function updateTask(_ref2) {
+  var id = _ref2.id,
+      task = _ref2.task;
   return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-    var _yield$axios$post, data;
+    var _yield$axios$put, data;
 
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
             _context3.next = 2;
-            return axios__WEBPACK_IMPORTED_MODULE_1___default().post("/api/tasks", {
-              title: title
-            });
+            return axios__WEBPACK_IMPORTED_MODULE_1___default().put("/api/tasks/".concat(id), task // 送信する値 task を渡す
+            );
 
           case 2:
-            _yield$axios$post = _context3.sent;
-            data = _yield$axios$post.data;
+            _yield$axios$put = _context3.sent;
+            data = _yield$axios$put.data;
             return _context3.abrupt("return", data);
 
           case 5:
@@ -2197,6 +2200,58 @@ var createTask = function createTask(title) {
         }
       }
     }, _callee3);
+  }));
+};
+
+var deleteTask = function deleteTask(id) {
+  return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+    var _yield$axios$delete, data;
+
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            _context4.next = 2;
+            return axios__WEBPACK_IMPORTED_MODULE_1___default()["delete"]("/api/tasks/".concat(id));
+
+          case 2:
+            _yield$axios$delete = _context4.sent;
+            data = _yield$axios$delete.data;
+            return _context4.abrupt("return", data);
+
+          case 5:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4);
+  }));
+};
+
+var createTask = function createTask(title) {
+  return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+    var _yield$axios$post, data;
+
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            _context5.next = 2;
+            return axios__WEBPACK_IMPORTED_MODULE_1___default().post("/api/tasks", {
+              title: title
+            });
+
+          case 2:
+            _yield$axios$post = _context5.sent;
+            data = _yield$axios$post.data;
+            return _context5.abrupt("return", data);
+
+          case 5:
+          case "end":
+            return _context5.stop();
+        }
+      }
+    }, _callee5);
   }));
 };
 
@@ -2416,12 +2471,94 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _queries_TaskQuery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../queries/TaskQuery */ "./resources/ts/queries/TaskQuery.ts");
+/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.esm.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
 
 
 
 var TaskItem = function TaskItem(_ref) {
   var task = _ref.task;
   var updateDoneTask = (0,_queries_TaskQuery__WEBPACK_IMPORTED_MODULE_1__.useUpdateDoneTask)();
+  var updateTask = (0,_queries_TaskQuery__WEBPACK_IMPORTED_MODULE_1__.useUpdateTask)();
+  var deleteTask = (0,_queries_TaskQuery__WEBPACK_IMPORTED_MODULE_1__.useDeleteTask)();
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(undefined),
+      _useState2 = _slicedToArray(_useState, 2),
+      editTitle = _useState2[0],
+      setEditTitle = _useState2[1]; // 初期値にundefined
+
+
+  var handleToggleEdit = function handleToggleEdit() {
+    setEditTitle(task.title); // タイトルが入るとundefinedじゃなくなるので見た目も切り替わる
+  };
+
+  var handleInputChange = function handleInputChange(e) {
+    setEditTitle(e.target.value); // 入力の度にデータが保持される
+  };
+
+  var handleUpdate = function handleUpdate(e) {
+    e.preventDefault();
+
+    if (!editTitle) {
+      // editTitleが入力されてない場合は処理を実行しないようにする
+      react_toastify__WEBPACK_IMPORTED_MODULE_2__.toast.error('タイトルを入力してください');
+      return;
+    }
+
+    var newTask = Object.assign({}, task);
+    newTask.title = editTitle;
+    updateTask.mutate({
+      id: task.id,
+      task: newTask
+    });
+    setEditTitle(undefined);
+  };
+
+  var handleOnKey = function handleOnKey(e) {
+    if (['Escape', 'Tab'].includes(e.key)) {
+      // 押されたキーボードがエスケープかタブなら初期のundefinedに戻す
+      setEditTitle(undefined);
+    }
+  };
+
+  var itemInput = function itemInput() {
+    return react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+      onSubmit: handleUpdate
+    }, react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      type: 'text',
+      className: 'input',
+      defaultValue: editTitle,
+      onChange: handleInputChange,
+      onKeyDown: handleOnKey
+    })), react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      className: 'btn',
+      onClick: handleUpdate
+    }, "\u66F4\u65B0"));
+  };
+
+  var itemText = function itemText() {
+    return react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      onClick: handleToggleEdit
+    }, react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, task.title)), react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      className: 'btn is-delete',
+      onClick: function onClick() {
+        return deleteTask.mutate(task.id);
+      }
+    }, "\u524A\u9664"));
+  };
+
   return react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
     className: task.is_done ? 'done' : ''
   }, react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
@@ -2432,9 +2569,7 @@ var TaskItem = function TaskItem(_ref) {
     onClick: function onClick() {
       return updateDoneTask.mutate(task);
     }
-  })), react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, task.title)), react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-    className: "btn is-delete"
-  }, "\u524A\u9664"));
+  })), editTitle === undefined ? itemText() : itemInput());
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TaskItem);
@@ -2531,7 +2666,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "useTasks": () => (/* binding */ useTasks),
 /* harmony export */   "useUpdateDoneTask": () => (/* binding */ useUpdateDoneTask),
-/* harmony export */   "useCreateTask": () => (/* binding */ useCreateTask)
+/* harmony export */   "useCreateTask": () => (/* binding */ useCreateTask),
+/* harmony export */   "useUpdateTask": () => (/* binding */ useUpdateTask),
+/* harmony export */   "useDeleteTask": () => (/* binding */ useDeleteTask)
 /* harmony export */ });
 /* harmony import */ var _api_TaskAPI__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/TaskAPI */ "./resources/ts/api/TaskAPI.ts");
 /* harmony import */ var react_query__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-query */ "./node_modules/react-query/es/index.js");
@@ -2581,6 +2718,47 @@ var useCreateTask = function useCreateTask() {
       } else {
         react_toastify__WEBPACK_IMPORTED_MODULE_2__.toast.error('登録に失敗しました');
       }
+    }
+  });
+};
+
+var useUpdateTask = function useUpdateTask() {
+  var queryClient = (0,react_query__WEBPACK_IMPORTED_MODULE_1__.useQueryClient)();
+  return (0,react_query__WEBPACK_IMPORTED_MODULE_1__.useMutation)(_api_TaskAPI__WEBPACK_IMPORTED_MODULE_0__.updateTask, {
+    onSuccess: function onSuccess() {
+      // コンポーネントの再描画
+      queryClient.invalidateQueries('tasks'); // useQueryで設定した'tasks'を入れる
+
+      react_toastify__WEBPACK_IMPORTED_MODULE_2__.toast.success('更新に成功しました');
+    },
+    onError: function onError(error) {
+      var _a, _b; // もしもエラーだったらオブジェクトの中をループさせてエラーメッセージをトーストする
+
+
+      if ((_a = error.response) === null || _a === void 0 ? void 0 : _a.data.errors) {
+        Object.values((_b = error.response) === null || _b === void 0 ? void 0 : _b.data.errors).map(function (messages) {
+          messages.map(function (message) {
+            react_toastify__WEBPACK_IMPORTED_MODULE_2__.toast.error(message);
+          });
+        });
+      } else {
+        react_toastify__WEBPACK_IMPORTED_MODULE_2__.toast.error('更新に失敗しました');
+      }
+    }
+  });
+};
+
+var useDeleteTask = function useDeleteTask() {
+  var queryClient = (0,react_query__WEBPACK_IMPORTED_MODULE_1__.useQueryClient)();
+  return (0,react_query__WEBPACK_IMPORTED_MODULE_1__.useMutation)(_api_TaskAPI__WEBPACK_IMPORTED_MODULE_0__.deleteTask, {
+    onSuccess: function onSuccess() {
+      // コンポーネントの再描画
+      queryClient.invalidateQueries('tasks'); // useQueryで設定した'tasks'を入れる
+
+      react_toastify__WEBPACK_IMPORTED_MODULE_2__.toast.success('削除に成功しました');
+    },
+    onError: function onError() {
+      react_toastify__WEBPACK_IMPORTED_MODULE_2__.toast.error('削除に失敗しました');
     }
   });
 };

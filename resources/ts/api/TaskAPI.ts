@@ -14,6 +14,21 @@ const updateDoneTask = async ({ id, is_done }: Task) => {
   return data
 }
 
+const updateTask = async ({ id, task }: { id: number, task: Task}) => {
+  const { data } = await axios.put<Task>(
+    `/api/tasks/${id}`,
+    task // 送信する値 task を渡す
+  )
+  return data
+}
+
+const deleteTask = async (id: number) => {
+  const { data } = await axios.delete<Task>(
+    `/api/tasks/${id}`,
+  )
+  return data
+}
+
 const createTask = async (title: string) => {
   const { data } = await axios.post<Task>(
     `/api/tasks`,
@@ -25,5 +40,7 @@ const createTask = async (title: string) => {
 export {
   getTasks,
   updateDoneTask,
-  createTask
+  createTask,
+  updateTask,
+  deleteTask
 }

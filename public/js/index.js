@@ -3156,7 +3156,11 @@ var Router = function Router() {
     to: "/help"
   }, "\u30D8\u30EB\u30D7")), react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
     to: "/login"
-  }, "\u30ED\u30B0\u30A4\u30F3")))); // ヘッダー部分はisAuthの状態によって切り替わる
+  }, "\u30ED\u30B0\u30A4\u30F3")))); // ローディングアイコンの設定
+
+  if (isLoading) return react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: 'loader'
+  }); // ヘッダー部分はisAuthの状態によって切り替わる
   // トップページはログインしないとアクセスできないページなので GuardRoute (完全一致でアクセスなので exact)
   // ログインページはログインしているとアクセスできないので LoginRoute
 

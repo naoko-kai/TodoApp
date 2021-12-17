@@ -65,6 +65,9 @@ const Router = () => {
     </header>        
   )
 
+  // ローディングアイコンの設定
+  if (isLoading) return <div className='loader'></div>
+
   // ヘッダー部分はisAuthの状態によって切り替わる
   // トップページはログインしないとアクセスできないページなので GuardRoute (完全一致でアクセスなので exact)
   // ログインページはログインしているとアクセスできないので LoginRoute

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react';
 import {
   BrowserRouter,
   Switch,
@@ -8,9 +8,14 @@ import {
 import TaskPage from './pages/tasks';
 import HelpPage from './pages/help';
 import LoginPage from './pages/login';
+import axios from 'axios';
 
 
 const Router = () => {
+
+  useEffect(() => {
+  }, [])
+
   return (
     <BrowserRouter>
         <header className="global-head"> 

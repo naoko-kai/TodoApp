@@ -5,17 +5,26 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\Task; // Taskモデルを使う
+use App\Models\User; // Userモデルを使う
 
 
 class TaskTest extends TestCase
 {
     use RefreshDatabase; //テスト実行時にDBがリセット
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $user = User::factory()->create();
+        $this->actingAs($user);
+    }
     /**
      * testアノテーションをつけると、test_メソッド名 としなくてよくなる
      *
      * @test
      */
-    public function 一覧を取得()
+    public function testgetLIst()
     {
         $tasks = Task::factory()->count(10)->create();
 
@@ -85,35 +94,35 @@ class TaskTest extends TestCase
     /**
      * @test
      */
-    public function 更新することができる()
-    {
+    // public function 更新することができる()
+    // {
 
-        $task = Task::factory()->create(); //タスクをあらかじめ登録
+    //     $task = Task::factory()->create(); //タスクをあらかじめ登録
 
-        $task->title = '書き換え';
+    //     $task->title = '書き換え';
 
-        $response = $this->patchJson("api/tasks/{$task->id}", $task->toArray()); //更新は patch。taskの array だけなので第二引数に入れる
+    //     $response = $this->patchJson("api/tasks/{$task->id}", $task->toArray()); //更新は patch。taskの array だけなので第二引数に入れる
 
-        $response
-            ->assertOk() 
-            ->assertJsonFragment($task->toArray()); //正しい情報かどうかの確認。$task->toArray()を引数に持たせる
-    }
+    //     $response
+    //         ->assertOk() 
+    //         ->assertJsonFragment($task->toArray()); //正しい情報かどうかの確認。$task->toArray()を引数に持たせる
+    // }
 
     /**
      * @test
      */
-    public function 削除することができる()
-    {
+    // public function 削除することができる()
+    // {
 
-        $task = Task::factory()->count(10)->create(); //タスクをあらかじめ登録
+    //     $task = Task::factory()->count(10)->create(); //タスクをあらかじめ登録
 
-        $response = $this->deleteJson("api/tasks/1"); //削除は delete。第二引数なし
-        $response->assertOk();
+    //     $response = $this->deleteJson("api/tasks/1"); //削除は delete。第二引数なし
+    //     $response->assertOk();
 
-        $response = $this->getJson("api/tasks");
-        $response->assertJsonCount($task->count()-1); // 期待するカウント数を引数に持たせる
+    //     $response = $this->getJson("api/tasks");
+    //     $response->assertJsonCount($task->count()-1); // 期待するカウント数を引数に持たせる
 
-    }
+    // }
     
 
 }

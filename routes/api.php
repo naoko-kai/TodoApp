@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::post('login', 'LoginController@login');
-Route::post('Logout', 'LoginController@logout');
+Route::post('logout', 'LoginController@logout');
 
 Route::group(['middleware' => 'auth:sanctum'], function() {
 

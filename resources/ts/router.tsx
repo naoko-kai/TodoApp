@@ -8,10 +8,11 @@ import {
 import TaskPage from './pages/tasks';
 import HelpPage from './pages/help';
 import LoginPage from './pages/login';
-import axios from 'axios';
+import { useLogout } from './queries/AuthQuery'
 
 
 const Router = () => {
+  const logout = useLogout();
 
   useEffect(() => {
   }, [])
@@ -23,7 +24,7 @@ const Router = () => {
             <li><Link to="/">ホーム</Link></li>
             <li><Link to="/help">ヘルプ</Link></li>
             <li><Link to="/login">ログイン</Link></li>
-            <li><span>ログアウト</span></li>
+            <li onClick={() => logout.mutate()}><span>ログアウト</span></li>
           </ul>
         </header>        
 

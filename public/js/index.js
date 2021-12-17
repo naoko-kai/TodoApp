@@ -2127,7 +2127,7 @@ var getUser = function getUser() {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
-            return axios__WEBPACK_IMPORTED_MODULE_1___default().get('api/User');
+            return axios__WEBPACK_IMPORTED_MODULE_1___default().get('api/user');
 
           case 2:
             _yield$axios$get = _context.sent;
@@ -2412,6 +2412,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_query__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-query */ "./node_modules/react-query/es/index.js");
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.esm.js");
 /* harmony import */ var react_toastify_dist_ReactToastify_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-toastify/dist/ReactToastify.css */ "./node_modules/react-toastify/dist/ReactToastify.css");
+/* harmony import */ var _hooks_AuthContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./hooks/AuthContext */ "./resources/ts/hooks/AuthContext.tsx");
+
 
 
 
@@ -2429,14 +2431,66 @@ var App = function App() {
       }
     }
   });
-  return react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_query__WEBPACK_IMPORTED_MODULE_2__.QueryClientProvider, {
+  return react__WEBPACK_IMPORTED_MODULE_0__.createElement(_hooks_AuthContext__WEBPACK_IMPORTED_MODULE_5__.AuthProvider, null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_query__WEBPACK_IMPORTED_MODULE_2__.QueryClientProvider, {
     client: queryClient
   }, react__WEBPACK_IMPORTED_MODULE_0__.createElement(_router__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_toastify__WEBPACK_IMPORTED_MODULE_3__.ToastContainer, {
     hideProgressBar: true
-  }));
+  })));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
+
+/***/ }),
+
+/***/ "./resources/ts/hooks/AuthContext.tsx":
+/*!********************************************!*\
+  !*** ./resources/ts/hooks/AuthContext.tsx ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "AuthProvider": () => (/* binding */ AuthProvider),
+/* harmony export */   "useAuth": () => (/* binding */ useAuth)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+ // 作成する時に AuthContextProps を設定して初期値を書く
+
+var AuthContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)({
+  isAuth: false,
+  setIsAuth: function setIsAuth() {}
+});
+var AuthProvider = function AuthProvider(_ref) {
+  var children = _ref.children;
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      isAuth = _useState2[0],
+      setIsAuth = _useState2[1];
+
+  return react__WEBPACK_IMPORTED_MODULE_0__.createElement(AuthContext.Provider, {
+    value: {
+      isAuth: isAuth,
+      setIsAuth: setIsAuth
+    }
+  }, children);
+};
+var useAuth = function useAuth() {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(AuthContext);
+};
 
 /***/ }),
 
@@ -2853,19 +2907,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_AuthAPI__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/AuthAPI */ "./resources/ts/api/AuthAPI.ts");
 /* harmony import */ var react_query__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-query */ "./node_modules/react-query/es/index.js");
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.esm.js");
+/* harmony import */ var _hooks_AuthContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../hooks/AuthContext */ "./resources/ts/hooks/AuthContext.tsx");
+
 
 
 
 
 var useUser = function useUser() {
-  return (0,react_query__WEBPACK_IMPORTED_MODULE_1__.useQuery)('users', function () {
+  return (0,react_query__WEBPACK_IMPORTED_MODULE_1__.useQuery)('user', function () {
     return _api_AuthAPI__WEBPACK_IMPORTED_MODULE_0__.getUser();
   });
 };
 
 var useLogin = function useLogin() {
+  var _useAuth = (0,_hooks_AuthContext__WEBPACK_IMPORTED_MODULE_3__.useAuth)(),
+      setIsAuth = _useAuth.setIsAuth;
+
   return (0,react_query__WEBPACK_IMPORTED_MODULE_1__.useMutation)(_api_AuthAPI__WEBPACK_IMPORTED_MODULE_0__.login, {
     onSuccess: function onSuccess(user) {
+      if (user) {
+        setIsAuth(true);
+      }
+
       console.log(user);
     },
     onError: function onError() {
@@ -2875,8 +2938,15 @@ var useLogin = function useLogin() {
 };
 
 var useLogout = function useLogout() {
+  var _useAuth2 = (0,_hooks_AuthContext__WEBPACK_IMPORTED_MODULE_3__.useAuth)(),
+      setIsAuth = _useAuth2.setIsAuth;
+
   return (0,react_query__WEBPACK_IMPORTED_MODULE_1__.useMutation)(_api_AuthAPI__WEBPACK_IMPORTED_MODULE_0__.logout, {
     onSuccess: function onSuccess(user) {
+      if (user) {
+        setIsAuth(false);
+      }
+
       console.log(user);
     },
     onError: function onError() {
@@ -3013,12 +3083,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _pages_tasks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pages/tasks */ "./resources/ts/pages/tasks/index.tsx");
 /* harmony import */ var _pages_help__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/help */ "./resources/ts/pages/help/index.tsx");
 /* harmony import */ var _pages_login__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/login */ "./resources/ts/pages/login/index.tsx");
 /* harmony import */ var _queries_AuthQuery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./queries/AuthQuery */ "./resources/ts/queries/AuthQuery.ts");
+/* harmony import */ var _hooks_AuthContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./hooks/AuthContext */ "./resources/ts/hooks/AuthContext.tsx");
+
 
 
 
@@ -3028,24 +3100,72 @@ __webpack_require__.r(__webpack_exports__);
 
 var Router = function Router() {
   var logout = (0,_queries_AuthQuery__WEBPACK_IMPORTED_MODULE_4__.useLogout)();
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {}, []);
-  return react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.BrowserRouter, null, react__WEBPACK_IMPORTED_MODULE_0__.createElement("header", {
+
+  var _useAuth = (0,_hooks_AuthContext__WEBPACK_IMPORTED_MODULE_5__.useAuth)(),
+      isAuth = _useAuth.isAuth,
+      setIsAuth = _useAuth.setIsAuth; // ログインユーザーの情報が使えるように設定
+
+
+  var _useUser = (0,_queries_AuthQuery__WEBPACK_IMPORTED_MODULE_4__.useUser)(),
+      isLoading = _useUser.isLoading,
+      authUser = _useUser.data;
+
+  console.log('authUser', authUser);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (authUser) {
+      setIsAuth(true);
+    }
+  }, [authUser]); // authUser に変更があった時に再度実行されるように設定
+  // ログインしていない時はログイン画面に遷移する
+
+  var GuardRoute = function GuardRoute(props) {
+    // isAuth が false の時にリダイレクト
+    if (!isAuth) return react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Redirect, {
+      to: '/login'
+    }); // それ以外はアクセスできるようにルートを返す
+
+    return react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, Object.assign({}, props));
+  }; // ログイン状態でログインページにアクセスした時にトップページへリダイレクト
+
+
+  var LoginRoute = function LoginRoute(props) {
+    if (isAuth) return react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Redirect, {
+      to: '/'
+    }); // それ以外はアクセスできるようにルートを返す
+
+    return react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, Object.assign({}, props));
+  }; // ヘッダーの切替をするためにヘッダー部分を変数に入れる
+  // ログイン後に使うもの
+
+
+  var navigation = react__WEBPACK_IMPORTED_MODULE_0__.createElement("header", {
     className: "global-head"
-  }, react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+  }, react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
     to: "/"
-  }, "\u30DB\u30FC\u30E0")), react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+  }, "\u30DB\u30FC\u30E0")), react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
     to: "/help"
-  }, "\u30D8\u30EB\u30D7")), react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
-    to: "/login"
-  }, "\u30ED\u30B0\u30A4\u30F3")), react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+  }, "\u30D8\u30EB\u30D7")), react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
     onClick: function onClick() {
       return logout.mutate();
     }
-  }, react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "\u30ED\u30B0\u30A2\u30A6\u30C8")))), react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Switch, null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+  }, react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "\u30ED\u30B0\u30A2\u30A6\u30C8")))); // ログインしていない時に使うもの
+
+  var loginNavigation = react__WEBPACK_IMPORTED_MODULE_0__.createElement("header", {
+    className: "global-head"
+  }, react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
+    to: "/help"
+  }, "\u30D8\u30EB\u30D7")), react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
+    to: "/login"
+  }, "\u30ED\u30B0\u30A4\u30F3")))); // ヘッダー部分はisAuthの状態によって切り替わる
+  // トップページはログインしないとアクセスできないページなので GuardRoute (完全一致でアクセスなので exact)
+  // ログインページはログインしているとアクセスできないので LoginRoute
+
+  return react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.BrowserRouter, null, isAuth ? navigation : loginNavigation, react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Switch, null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
     path: "/help"
-  }, react__WEBPACK_IMPORTED_MODULE_0__.createElement(_pages_help__WEBPACK_IMPORTED_MODULE_2__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+  }, react__WEBPACK_IMPORTED_MODULE_0__.createElement(_pages_help__WEBPACK_IMPORTED_MODULE_2__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0__.createElement(LoginRoute, {
     path: "/login"
-  }, react__WEBPACK_IMPORTED_MODULE_0__.createElement(_pages_login__WEBPACK_IMPORTED_MODULE_3__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+  }, react__WEBPACK_IMPORTED_MODULE_0__.createElement(_pages_login__WEBPACK_IMPORTED_MODULE_3__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0__.createElement(GuardRoute, {
+    exact: true,
     path: "/"
   }, react__WEBPACK_IMPORTED_MODULE_0__.createElement(_pages_tasks__WEBPACK_IMPORTED_MODULE_1__["default"], null))));
 };

@@ -2512,6 +2512,30 @@ react_dom__WEBPACK_IMPORTED_MODULE_1__.render(react__WEBPACK_IMPORTED_MODULE_0__
 
 /***/ }),
 
+/***/ "./resources/ts/pages/error/index.tsx":
+/*!********************************************!*\
+  !*** ./resources/ts/pages/error/index.tsx ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+var NotFoundPage = function NotFoundPage() {
+  return react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "align-center"
+  }, react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "404 Not Found"), react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "\u304A\u63A2\u3057\u306E\u30DA\u30FC\u30B8\u306F\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3067\u3057\u305F\u3002"));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NotFoundPage);
+
+/***/ }),
+
 /***/ "./resources/ts/pages/help/index.tsx":
 /*!*******************************************!*\
   !*** ./resources/ts/pages/help/index.tsx ***!
@@ -3083,13 +3107,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _pages_tasks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pages/tasks */ "./resources/ts/pages/tasks/index.tsx");
 /* harmony import */ var _pages_help__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/help */ "./resources/ts/pages/help/index.tsx");
 /* harmony import */ var _pages_login__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/login */ "./resources/ts/pages/login/index.tsx");
-/* harmony import */ var _queries_AuthQuery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./queries/AuthQuery */ "./resources/ts/queries/AuthQuery.ts");
-/* harmony import */ var _hooks_AuthContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./hooks/AuthContext */ "./resources/ts/hooks/AuthContext.tsx");
+/* harmony import */ var _pages_error__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/error */ "./resources/ts/pages/error/index.tsx");
+/* harmony import */ var _queries_AuthQuery__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./queries/AuthQuery */ "./resources/ts/queries/AuthQuery.ts");
+/* harmony import */ var _hooks_AuthContext__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./hooks/AuthContext */ "./resources/ts/hooks/AuthContext.tsx");
+
 
 
 
@@ -3099,14 +3125,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Router = function Router() {
-  var logout = (0,_queries_AuthQuery__WEBPACK_IMPORTED_MODULE_4__.useLogout)();
+  var logout = (0,_queries_AuthQuery__WEBPACK_IMPORTED_MODULE_5__.useLogout)();
 
-  var _useAuth = (0,_hooks_AuthContext__WEBPACK_IMPORTED_MODULE_5__.useAuth)(),
+  var _useAuth = (0,_hooks_AuthContext__WEBPACK_IMPORTED_MODULE_6__.useAuth)(),
       isAuth = _useAuth.isAuth,
       setIsAuth = _useAuth.setIsAuth; // ログインユーザーの情報が使えるように設定
 
 
-  var _useUser = (0,_queries_AuthQuery__WEBPACK_IMPORTED_MODULE_4__.useUser)(),
+  var _useUser = (0,_queries_AuthQuery__WEBPACK_IMPORTED_MODULE_5__.useUser)(),
       isLoading = _useUser.isLoading,
       authUser = _useUser.data;
 
@@ -3120,29 +3146,29 @@ var Router = function Router() {
 
   var GuardRoute = function GuardRoute(props) {
     // isAuth が false の時にリダイレクト
-    if (!isAuth) return react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Redirect, {
+    if (!isAuth) return react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Redirect, {
       to: '/login'
     }); // それ以外はアクセスできるようにルートを返す
 
-    return react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, Object.assign({}, props));
+    return react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, Object.assign({}, props));
   }; // ログイン状態でログインページにアクセスした時にトップページへリダイレクト
 
 
   var LoginRoute = function LoginRoute(props) {
-    if (isAuth) return react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Redirect, {
+    if (isAuth) return react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Redirect, {
       to: '/'
     }); // それ以外はアクセスできるようにルートを返す
 
-    return react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, Object.assign({}, props));
+    return react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, Object.assign({}, props));
   }; // ヘッダーの切替をするためにヘッダー部分を変数に入れる
   // ログイン後に使うもの
 
 
   var navigation = react__WEBPACK_IMPORTED_MODULE_0__.createElement("header", {
     className: "global-head"
-  }, react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
+  }, react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Link, {
     to: "/"
-  }, "\u30DB\u30FC\u30E0")), react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
+  }, "\u30DB\u30FC\u30E0")), react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Link, {
     to: "/help"
   }, "\u30D8\u30EB\u30D7")), react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
     onClick: function onClick() {
@@ -3152,9 +3178,9 @@ var Router = function Router() {
 
   var loginNavigation = react__WEBPACK_IMPORTED_MODULE_0__.createElement("header", {
     className: "global-head"
-  }, react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
+  }, react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Link, {
     to: "/help"
-  }, "\u30D8\u30EB\u30D7")), react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
+  }, "\u30D8\u30EB\u30D7")), react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Link, {
     to: "/login"
   }, "\u30ED\u30B0\u30A4\u30F3")))); // ローディングアイコンの設定
 
@@ -3164,14 +3190,16 @@ var Router = function Router() {
   // トップページはログインしないとアクセスできないページなので GuardRoute (完全一致でアクセスなので exact)
   // ログインページはログインしているとアクセスできないので LoginRoute
 
-  return react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.BrowserRouter, null, isAuth ? navigation : loginNavigation, react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Switch, null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+  return react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.BrowserRouter, null, isAuth ? navigation : loginNavigation, react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Switch, null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
     path: "/help"
   }, react__WEBPACK_IMPORTED_MODULE_0__.createElement(_pages_help__WEBPACK_IMPORTED_MODULE_2__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0__.createElement(LoginRoute, {
     path: "/login"
   }, react__WEBPACK_IMPORTED_MODULE_0__.createElement(_pages_login__WEBPACK_IMPORTED_MODULE_3__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0__.createElement(GuardRoute, {
     exact: true,
     path: "/"
-  }, react__WEBPACK_IMPORTED_MODULE_0__.createElement(_pages_tasks__WEBPACK_IMPORTED_MODULE_1__["default"], null))));
+  }, react__WEBPACK_IMPORTED_MODULE_0__.createElement(_pages_tasks__WEBPACK_IMPORTED_MODULE_1__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+    component: _pages_error__WEBPACK_IMPORTED_MODULE_4__["default"]
+  })));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Router);

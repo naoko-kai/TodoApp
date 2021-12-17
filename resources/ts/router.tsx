@@ -7,9 +7,10 @@ import {
   RouteProps,
   Redirect
 } from "react-router-dom";
-import TaskPage from './pages/tasks';
-import HelpPage from './pages/help';
-import LoginPage from './pages/login';
+import TaskPage from './pages/tasks'
+import HelpPage from './pages/help'
+import LoginPage from './pages/login'
+import NotFoundPage from './pages/error'
 import { useLogout, useUser } from './queries/AuthQuery'
 import { useAuth } from './hooks/AuthContext';
 
@@ -84,6 +85,7 @@ const Router = () => {
           <GuardRoute exact path="/">
             <TaskPage />
           </GuardRoute>
+          <Route component={NotFoundPage} />
         </Switch>
     </BrowserRouter>
   );

@@ -7,9 +7,22 @@ use App\Models\Task;
 // use App\Http\Requests\UpdateTaskRequest;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
+    /**
+     * TaskPolicyを実行する
+     */
+    public function __construct() 
+    {
+        // ポリシーの指定と範囲の限定
+        $this->middleware('can:checkUser,task')->only([
+            'updateDone', 'update', 'destroy'
+        ]);
+    }
+
+
     /**
      * タスク一覧を表示
      *
@@ -17,7 +30,10 @@ class TaskController extends Controller
      */
     public function index()
     {
-        return Task::orderByDesc('id')->get();
+        // タスクのユーザーIDとログインユーザーIDが一致しているものを返す
+        // AuthファサードからIDを指定する
+        return Task::where('user_id', Auth::id())->orderByDesc('id')->get();
+        // return Task::orderByDesc('id')->get();
     
     }
 
@@ -27,6 +43,11 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
+        // マージ機能でユーザーIDを追加する
+        $request->merge([
+            'user_id' => Auth::id()
+        ]);
+
         $validator = Validator::make($request->all(), [
             'title'  => 'required|max:255',
         ]);

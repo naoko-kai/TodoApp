@@ -11,14 +11,17 @@ class TaskPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view any models.
-     *
      * @param  \App\Models\User  $user
+     * @param  \App\Models\Task  $task
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(User $user)
+    public function checkUser(User $user, Task $task)
     {
-        //
+        //ユーザーIDとタスクのユーザーIDが一致していた場合 true を返す
+        if ($user->id === $task->user_id) {
+            
+            return true;
+        }
     }
 
     /**

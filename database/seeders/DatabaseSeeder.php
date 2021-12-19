@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(UserSeeder::class); // タスクはユーザーデータを見ることになるので先にユーザーデータを生成する
         $this->call(TaskSeeder::class);
-        $this->call(UserSeeder::class);
     }
 }
